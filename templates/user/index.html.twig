@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if (result.error is not null) %}
+        <div class="alert alert-danger" role="alert">
+            Error. Please try later.
+        </div>
+    {% endif %}
+    {% if result.items %}
+        {% for entry in result.items %}
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-2">
+                        {% if entry.avatar %}
+                            <img src="{{ entry.avatar }}" class="card-img">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ entry.name }}</h5>
+                            <p class="card-text">{{ entry.title }}</p>
+                            <p class="card-text">{{ entry.company }}</p>
+                            <p class="card-text">{{ entry.bio }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
