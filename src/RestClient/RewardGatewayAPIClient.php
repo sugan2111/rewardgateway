@@ -1,17 +1,22 @@
 <?php
 namespace App\RestClient;
-
 use App\DTO\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
 class RewardGatewayAPIClient
 {
+    private $client;
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
     public function fetchUsers(): array {
-        $client = new Client();
         $result = ['error' => null, 'items' => []];
         try {
-            $response = $client->request('GET', 'http://hiring.rewardgateway.net/list', [
+            $response = $this->client->request('GET', 'http://hiring.rewardgateway.net/list', [
                 RequestOptions::HEADERS => [
                     'Accept' => 'application/json',
                 ],
